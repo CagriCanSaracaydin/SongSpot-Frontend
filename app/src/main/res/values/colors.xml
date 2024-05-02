@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dark_background">#212121</color>
+    <color name="dark_toolbar">#333333</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dark_card_background">#2F2F2F</color>
+    <color name="purple_500">#B388FF</color>
+    <color name="meta_dark_background">#212121</color>
+    <color name="meta_dark_card_background">#2F2F2F</color>
+
+    <color name="colorPrimary">#B388FF</color>
+    <color name="colorPrimaryDark">#000000</color> <!-- Black color -->
+    <color name="colorAccent">#FF4081</color>
+</resources>
