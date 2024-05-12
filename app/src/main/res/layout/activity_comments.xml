@@ -61,9 +61,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" /> <!-- Increased margin top -->
 
-
-
-
     <TextView
         android:id="@+id/emptyTextView"
         android:layout_width="match_parent"

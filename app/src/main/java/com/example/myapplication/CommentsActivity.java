@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
@@ -50,6 +52,11 @@ public class CommentsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Comment>> call, Throwable t) {
                 // Handle the failure case
+                Log.e("CommentsActivity", "Failed to fetch comments", t);
+
+                // Display an error message to the user
+                Toast.makeText(CommentsActivity.this, "Failed to load comments", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
