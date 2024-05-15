@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class SongDetailsActivity extends AppCompatActivity {
     private TextView songName, artistName, songYear, songGenre;
     private RatingBar averageRatingBar, userRatingBar;
-    private EditText commentInput,userNameInput;
+    private EditText commentInput, userNameInput;
     private Button submitComment, viewComments;
     private String songId;
 
@@ -42,11 +42,11 @@ public class SongDetailsActivity extends AppCompatActivity {
         submitComment = findViewById(R.id.submitComment);
         viewComments = findViewById(R.id.viewComments);
         userNameInput = findViewById(R.id.userNameInput);
-        submitComment = findViewById(R.id.submitComment);
 
         fetchSongDetails(songId);
         fetchAndDisplayAverageRating(songId);
         initRatingBar();
+
         submitComment.setOnClickListener(v -> {
             String userName = userNameInput.getText().toString().trim();
             String commentText = commentInput.getText().toString().trim();
@@ -68,19 +68,22 @@ public class SongDetailsActivity extends AppCompatActivity {
             public void onResponse(Call<Song> call, Response<Song> response) {
                 if (response.isSuccessful()) {
                     Song song = response.body();
-                    songName.setText(song.getName());
-                    artistName.setText(song.getArtist());
-                    songYear.setText(String.valueOf(song.getYear()));
-                    songGenre.setText(song.getGenre());
+                    if (song != null) {
+                        songName.setText(song.getName());
+                        artistName.setText(song.getArtist());
+                        songYear.setText(String.valueOf(song.getYear()));
+                        songGenre.setText(song.getGenre());
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Song> call, Throwable t) {
-                // Handle the failure case
+                Toast.makeText(SongDetailsActivity.this, "Failed to fetch song details: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
+
     private void initRatingBar() {
         userRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             if (fromUser) {
@@ -88,8 +91,9 @@ public class SongDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
     private void postRating(String songId, float rating) {
-        String userName = "Username";
+        String userName = "Username"; // Replace with actual user name logic
         String currentTimeStamp = getCurrentTimeStamp();
 
         Rating ratingObj = new Rating(songId, userName, (int) rating, currentTimeStamp);
@@ -111,6 +115,7 @@ public class SongDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
     private void fetchAndDisplayAverageRating(String songId) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<List<Rating>> call = apiService.getRatingsBySongId(songId);
@@ -137,8 +142,6 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void postComment(String userName, String commentText) {
         Comment comment = new Comment(songId, userName, commentText, getCurrentTimeStamp());
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
@@ -160,7 +163,6 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
-
     private void viewComments() {
         Intent intent = new Intent(this, CommentsActivity.class);
         intent.putExtra("SONG_ID", songId);
@@ -171,6 +173,4 @@ public class SongDetailsActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         return sdf.format(new Date());
     }
-
-
 }

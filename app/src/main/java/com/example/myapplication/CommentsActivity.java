@@ -25,8 +25,8 @@ public class CommentsActivity extends AppCompatActivity {
 
         songId = getIntent().getStringExtra("SONG_ID");
         commentsList = findViewById(R.id.commentsList);
-        TextView emptyTextView = findViewById(R.id.emptyTextView); // Assume this TextView is added to your layout
-        commentsList.setEmptyView(emptyTextView); // Set the empty view for the ListView
+        TextView emptyTextView = findViewById(R.id.emptyTextView);
+        commentsList.setEmptyView(emptyTextView);
 
         fetchComments();
     }

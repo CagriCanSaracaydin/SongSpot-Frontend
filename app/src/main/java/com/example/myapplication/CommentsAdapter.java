@@ -52,12 +52,12 @@ public class CommentsAdapter extends BaseAdapter {
         // Format the timestamp before setting it
         try {
             SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-            Date date = isoFormat.parse(comment.getTimeStamp());  // Parse the ISO 8601 string
+            Date date = isoFormat.parse(comment.getTimeStamp());
             SimpleDateFormat desiredFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault());
-            String formattedDate = desiredFormat.format(date);  // Format to a more readable form
+            String formattedDate = desiredFormat.format(date);
             timeStamp.setText(formattedDate);
         } catch (Exception e) {
-            timeStamp.setText(comment.getTimeStamp());  // Fallback to the original timestamp in case of parsing error
+            timeStamp.setText(comment.getTimeStamp());
         }
 
         return convertView;
