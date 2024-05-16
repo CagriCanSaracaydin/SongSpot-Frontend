@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212"
     android:padding="16dp">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <TextView
         android:id="@+id/headerTitle"
-        android:layout_width="121dp"
-        android:layout_height="48dp"
+        android:layout_width="120dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_bg"
         android:elevation="4dp"
         android:fontFamily="@font/roboto_condensed_bold"
@@ -19,32 +29,42 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewAppIcon"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewAppIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewAppIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
+        android:layout_width="52dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="@id/headerTitle"
-        app:layout_constraintEnd_toStartOf="@id/textViewSongSpot"
-        app:layout_constraintTop_toTopOf="@id/headerTitle" />
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/headerTitle"
+        app:layout_constraintEnd_toStartOf="@+id/textViewSongSpot"
+        app:layout_constraintStart_toEndOf="@+id/headerTitle"
+        app:layout_constraintTop_toTopOf="@+id/headerTitle"
+        app:layout_constraintVertical_bias="0.45" />
 
     <TextView
         android:id="@+id/textViewSongSpot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_bg"
         android:elevation="4dp"
         android:fontFamily="@font/roboto_condensed_bold"
         android:text="@string/songspot"
         android:textColor="#B388FF"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewAppIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/headerTitle" />
+        app:layout_constraintStart_toEndOf="@+id/imageViewAppIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ListView
         android:id="@+id/commentsList"
@@ -69,9 +89,5 @@
         android:text="Be The First Spotter to Comment"
         android:textSize="18sp"
         android:visibility="gone" /> <!-- Initially hidden -->
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
