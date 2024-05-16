@@ -78,7 +78,7 @@
                 android:isIndicator="true"
                 android:numStars="5"
                 android:progressTint="#B388FF"
-                android:stepSize="0.1" />
+                android:stepSize="1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                 android:layout_gravity="center_horizontal"
                 android:numStars="5"
                 android:progressTint="#B388FF"
-                android:stepSize="0.1" />
+                android:stepSize="1" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout

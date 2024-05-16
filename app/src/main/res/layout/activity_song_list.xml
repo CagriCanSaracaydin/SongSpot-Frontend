@@ -9,10 +9,16 @@
     android:background="#121212"
     tools:context=".SongListActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
         android:id="@+id/textViewTitle"
-        android:layout_width="93dp"
+        android:layout_width="126dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -22,15 +28,29 @@
         android:text="@string/song_list"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewAppIcon"
         app:layout_constraintEnd_toStartOf="@+id/imageViewAppIcon"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewAppIcon"
+        android:layout_width="52dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="4dp"
+        android:src="@drawable/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintEnd_toStartOf="@+id/textViewSongSpot"
+        app:layout_constraintStart_toEndOf="@+id/textViewTitle"
+        app:layout_constraintTop_toTopOf="@+id/textViewTitle"
+        app:layout_constraintVertical_bias="0.45" />
 
     <TextView
         android:id="@+id/textViewSongSpot"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_bg"
@@ -39,22 +59,11 @@
         android:text="@string/songspot"
         android:textColor="#B388FF"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewAppIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <ImageView
-        android:id="@+id/imageViewAppIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:src="@drawable/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
-        app:layout_constraintEnd_toStartOf="@+id/textViewSongSpot"
-        app:layout_constraintTop_toTopOf="@+id/textViewTitle"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAppIcon"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSongs"
