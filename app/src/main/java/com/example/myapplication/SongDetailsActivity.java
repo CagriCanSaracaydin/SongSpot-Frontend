@@ -19,19 +19,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// Activity class for displaying song details and handling user interactions
 public class SongDetailsActivity extends AppCompatActivity {
-    private TextView songName, artistName, songYear, songGenre;
-    private RatingBar averageRatingBar, userRatingBar;
-    private EditText commentInput, userNameInput;
-    private Button submitComment, viewComments;
-    private String songId;
+    private TextView songName, artistName, songYear, songGenre; // TextViews for displaying song details
+    private RatingBar averageRatingBar, userRatingBar; // RatingBars for displaying average and user ratings
+    private EditText commentInput, userNameInput; // EditTexts for user input
+    private Button submitComment, viewComments; // Buttons for submitting comment and viewing comments
+    private String songId; // ID of the song to be displayed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_song_details);
+        setContentView(R.layout.activity_song_details); // Set the layout for this activity
 
+        // Retrieve the song ID from the intent extras
         songId = getIntent().getStringExtra("SONG_ID");
+
+        // Initialize the UI components
         songName = findViewById(R.id.songName);
         artistName = findViewById(R.id.artistName);
         songYear = findViewById(R.id.songYear);
@@ -43,10 +47,14 @@ public class SongDetailsActivity extends AppCompatActivity {
         viewComments = findViewById(R.id.viewComments);
         userNameInput = findViewById(R.id.userNameInput);
 
+        // Fetch and display the song details
         fetchSongDetails(songId);
+        // Fetch and display the average rating for the song
         fetchAndDisplayAverageRating(songId);
+        // Initialize the rating bar for user ratings
         initRatingBar();
 
+        // Set click listener for the submit comment button
         submitComment.setOnClickListener(v -> {
             String userName = userNameInput.getText().toString().trim();
             String commentText = commentInput.getText().toString().trim();
@@ -57,9 +65,11 @@ public class SongDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // Set click listener for the view comments button
         viewComments.setOnClickListener(v -> viewComments());
     }
 
+    // Fetches and displays the song details
     private void fetchSongDetails(String id) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<Song> call = apiService.getSongById(id);
@@ -84,6 +94,7 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
+    // Initializes the user rating bar to handle user rating changes
     private void initRatingBar() {
         userRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             if (fromUser) {
@@ -92,6 +103,7 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
+    // Posts the user rating
     private void postRating(String songId, float rating) {
         String userName = "Username"; // Replace with actual user name logic
         String currentTimeStamp = getCurrentTimeStamp();
@@ -116,6 +128,7 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
+    // Fetches and displays the average rating for the song
     private void fetchAndDisplayAverageRating(String songId) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<List<Rating>> call = apiService.getRatingsBySongId(songId);
@@ -142,6 +155,7 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
+    // Posts the user comment to the server
     private void postComment(String userName, String commentText) {
         Comment comment = new Comment(songId, userName, commentText, getCurrentTimeStamp());
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
@@ -163,12 +177,14 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
+    // Launches the CommentsActivity to view comments
     private void viewComments() {
         Intent intent = new Intent(this, CommentsActivity.class);
         intent.putExtra("SONG_ID", songId);
         startActivity(intent);
     }
 
+    // Gets the current timestamp in ISO
     private String getCurrentTimeStamp() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         return sdf.format(new Date());
