@@ -3,20 +3,16 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Objects;
+
 /**
  * ApiResult class to encapsulate the response from API POST operations,
- * such as posting comments or ratings. This class provides getters and setters
- * for the status and message of the API response.
+ * such as posting comments or ratings. This class provides getters for
+ * the status and message of the API response.
  */
-public class ApiResult {
-    private String status;
-    private String message;
-
-    /**
-     * Default constructor for ApiResult.
-     */
-    public ApiResult() {
-    }
+public final class ApiResult {
+    private final String status;
+    private final String message;
 
     /**
      * Constructor for ApiResult with status and message.
@@ -24,7 +20,7 @@ public class ApiResult {
      * @param message The message from the API response.
      */
     public ApiResult(@NonNull String status, @Nullable String message) {
-        this.status = status;
+        this.status = Objects.requireNonNull(status, "status must not be null");
         this.message = message;
     }
 
@@ -38,28 +34,12 @@ public class ApiResult {
     }
 
     /**
-     * Sets the status of the API response.
-     * @param status The status to set.
-     */
-    public void setStatus(@NonNull String status) {
-        this.status = status;
-    }
-
-    /**
      * Gets the message from the API response, if any.
      * @return The message from the API response, or null if none.
      */
     @Nullable
     public String getMessage() {
         return message;
-    }
-
-    /**
-     * Sets the message in the API response.
-     * @param message The message to set, can be null.
-     */
-    public void setMessage(@Nullable String message) {
-        this.message = message;
     }
 
     /**
@@ -72,5 +52,19 @@ public class ApiResult {
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ApiResult apiResult = (ApiResult) o;
+        return status.equals(apiResult.status) &&
+                Objects.equals(message, apiResult.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(status, message);
     }
 }
