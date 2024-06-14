@@ -14,5 +14,3 @@ This repository hosts the **Android frontend** for SongSpot, an ambitious projec
 * Java
 * Android SDK
 * RESTful APIs
-
-**This repository is a work in progress.** We welcome contributions from passionate Android developers and music lovers alike. Join us in building the ultimate music discovery platform! 🎶
