@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
 public class Rating {
     private String songId;
     private String username;
